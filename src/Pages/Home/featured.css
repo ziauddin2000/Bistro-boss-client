@@ -1,0 +1,6 @@
+.featured-section {
+  background-image: url("../../assets/home/featured-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}

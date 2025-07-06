@@ -1,0 +1,12 @@
+.thumbs-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.carousel .slide img {
+  height: 60vh;
+  object-fit: cover;
+  object-position: center;
+}
