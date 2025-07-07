@@ -7,9 +7,16 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import ProductCard from "../../Shared/ProductCard/ProductCard";
 import useMenu from "../../hooks/useMenu";
+import { useParams } from "react-router-dom";
 
 const Order = () => {
-  const [tabs, setTabs] = useState(0);
+  let categories = ["salad", "pizza", "soup", "dessert", "drinks"];
+  let { category } = useParams();
+  if (category === undefined) {
+    category = "salad";
+  }
+  let initialIndex = categories.indexOf(category);
+  const [tabs, setTabs] = useState(initialIndex);
 
   let { menus } = useMenu();
   let desserts = menus.filter((item) => item.category == "dessert");

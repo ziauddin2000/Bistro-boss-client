@@ -1,6 +1,20 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../provider/AuthProvider";
+import { IoCart } from "react-icons/io5";
 
 const Header = () => {
+  let { user, signOutUser } = useContext(AuthContext);
+
+  let navigate = useNavigate();
+
+  // Handle Sign Out
+  let handleSignOut = () => {
+    signOutUser().then(() => {
+      navigate("/login");
+    });
+  };
+
   let menu = (
     <>
       <li>
@@ -11,6 +25,15 @@ const Header = () => {
       </li>
       <li>
         <Link to="/order">Order</Link>
+      </li>
+      <li>
+        <Link to="/secret">Secret</Link>
+      </li>
+      <li>
+        <button className="btn">
+          <IoCart className="text-xl" />{" "}
+          <div className="badge badge-sm badge-secondary">+0</div>
+        </button>
       </li>
     </>
   );
@@ -55,8 +78,24 @@ const Header = () => {
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">{menu}</ul>
           </div>
-          <div className="navbar-end">
-            <a className="btn">Profle</a>
+          <div className="navbar-end gap-2">
+            {user ? (
+              <>
+                <div className="avatar">
+                  <div className="w-10 rounded-full">
+                    <img src={user?.photoURL} />
+                  </div>
+                </div>
+
+                <button className="btn" onClick={handleSignOut}>
+                  Sign Out
+                </button>
+              </>
+            ) : (
+              <Link to="/login" className="btn">
+                Login
+              </Link>
+            )}
           </div>
         </div>
       </div>

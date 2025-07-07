@@ -34,6 +34,7 @@ const Menu = () => {
         <Menucategory
           items={offereds}
           btnTitle="Order Your Favourite Food"
+          buttonLink="/order/salad"
         ></Menucategory>
 
         {/* Dessert */}
@@ -43,6 +44,7 @@ const Menu = () => {
           subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit. A animi ducimus eos voluptas veritatis"
           items={desserts}
           btnTitle="Order Your Favourite Food"
+          buttonLink="/order/dessert"
         ></Menucategory>
 
         {/* Pizza */}
@@ -52,6 +54,7 @@ const Menu = () => {
           subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit. A animi ducimus eos voluptas veritatis"
           items={pizzas}
           btnTitle="Order Your Favourite Food"
+          buttonLink="/order/pizza"
         ></Menucategory>
 
         {/* Salad */}
@@ -61,6 +64,7 @@ const Menu = () => {
           subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit. A animi ducimus eos voluptas veritatis"
           items={salads}
           btnTitle="Order Your Favourite Food"
+          buttonLink="/order/salad"
         ></Menucategory>
 
         {/* Soup */}
@@ -70,6 +74,7 @@ const Menu = () => {
           subtitle="Lorem ipsum, dolor sit amet consectetur adipisicing elit. A animi ducimus eos voluptas veritatis"
           items={soups}
           btnTitle="Order Your Favourite Food"
+          buttonLink="/order/soup"
         ></Menucategory>
       </div>
     </>
