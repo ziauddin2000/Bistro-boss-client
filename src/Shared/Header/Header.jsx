@@ -2,11 +2,13 @@ import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 import { IoCart } from "react-icons/io5";
+import useCart from "../../hooks/useCart";
 
 const Header = () => {
   let { user, signOutUser } = useContext(AuthContext);
-
   let navigate = useNavigate();
+
+  let [cart] = useCart();
 
   // Handle Sign Out
   let handleSignOut = () => {
@@ -32,7 +34,7 @@ const Header = () => {
       <li>
         <button className="btn">
           <IoCart className="text-xl" />{" "}
-          <div className="badge badge-sm badge-secondary">+0</div>
+          <div className="badge badge-sm badge-secondary">+{cart.length}</div>
         </button>
       </li>
     </>
