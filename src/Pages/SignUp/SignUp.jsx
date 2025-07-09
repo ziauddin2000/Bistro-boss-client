@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 export default function SignUp() {
   let { createUser, updateProfileUser } = useContext(AuthContext);
+  let AxiosPublic = useAxiosPublic();
 
   // Handle form submission
   let handleSubmit = (event) => {
@@ -21,11 +23,17 @@ export default function SignUp() {
         if (result.user) {
           updateProfileUser(name, photoURL)
             .then(() => {
-              form.reset();
-              Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "User created successfully",
+              // login user to mongoDB
+              let userInfo = { name, email, photoURL, password };
+              AxiosPublic.post("/users", userInfo).then((res) => {
+                if (res.data.insertedId) {
+                  form.reset();
+                  Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "User created successfully",
+                  });
+                }
               });
             })
             .catch(() => {

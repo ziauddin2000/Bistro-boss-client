@@ -8,9 +8,11 @@ import {
 import { AuthContext } from "../../provider/AuthProvider";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 export default function Login() {
   let { signInUser, googleSignIn } = useContext(AuthContext);
+  let AxiosPublic = useAxiosPublic();
 
   let location = useLocation();
   let navigate = useNavigate();
@@ -59,13 +61,32 @@ export default function Login() {
   // Handle Google Sign In
   const handleGoogleSignIn = () => {
     googleSignIn()
-      .then(() => {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Login successful",
-        }).then(() => {
-          navigate(redirectTo);
+      .then((result) => {
+        // add use to mongoDB
+        let userInfo = {
+          name: result.user.displayName,
+          email: result.user.email,
+          photoURL: result.user.photoURL,
+        };
+
+        AxiosPublic.post("/users", userInfo).then((res) => {
+          if (res.data.insertedId) {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Login successful",
+            }).then(() => {
+              navigate(redirectTo);
+            });
+          } else if (res.data.insertedId === null) {
+            navigate(redirectTo);
+          } else {
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: "Something went wrong! User login failed!",
+            });
+          }
         });
       })
       .catch((error) => {

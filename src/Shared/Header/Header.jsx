@@ -32,10 +32,12 @@ const Header = () => {
         <Link to="/secret">Secret</Link>
       </li>
       <li>
-        <button className="btn">
-          <IoCart className="text-xl" />{" "}
-          <div className="badge badge-sm badge-secondary">+{cart.length}</div>
-        </button>
+        <Link to="/dashboard/cart">
+          <button className="btn">
+            <IoCart className="text-xl" />{" "}
+            <div className="badge badge-sm badge-secondary">+{cart.length}</div>
+          </button>
+        </Link>
       </li>
     </>
   );

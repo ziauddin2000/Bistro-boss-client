@@ -39,7 +39,7 @@ export default function Cart() {
     <div className="py-10 px-5">
       <h1 className="text-2xl sm:text-3xl font-semibold mb-5">Cart</h1>
       <div className="overflow-x-auto">
-        <div className="flex justify-between items-center my-5 gap-2">
+        <div className="flex justify-evenly items-center my-5 gap-2">
           <h1 className="font-semibold text-xl uppercase">
             Total Order: {cart.length}
           </h1>
