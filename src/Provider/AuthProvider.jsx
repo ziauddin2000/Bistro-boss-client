@@ -10,12 +10,14 @@ import {
 } from "firebase/auth";
 import { app } from "../Firebase/Firebase.config";
 import { GoogleAuthProvider } from "firebase/auth";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 export const AuthContext = createContext(null);
 
 export default function AuthProvider({ children }) {
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
+  let AxiosPublic = useAxiosPublic();
 
   let [user, setUser] = useState([]);
   let [loading, setLoading] = useState(true);
@@ -52,9 +54,26 @@ export default function AuthProvider({ children }) {
 
   // Observe Auth State Change
   useEffect(() => {
-    let subscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
+    let subscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
       setLoading(false);
+
+      // jwt token call
+      let userInfo = {
+        user: currentUser,
+      };
+
+      if (currentUser) {
+        AxiosPublic.post("/jwt", userInfo).then((res) => {
+          if (res.data.token) {
+            localStorage.setItem("token", res.data.token);
+          } else {
+            localStorage.removeItem("token");
+          }
+        });
+      } else {
+        localStorage.removeItem("token");
+      }
     });
 
     return () => {

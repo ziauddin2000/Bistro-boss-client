@@ -9,7 +9,10 @@ export default function AllUsers() {
   // get user with tanstack query
   const { data, refetch } = useQuery({
     queryKey: ["users"],
-    queryFn: () => AxiosSecure.get("/users").then((res) => res.data),
+    queryFn: () =>
+      AxiosSecure.get("/users", {
+        headers: { authorization: `Bearer ${localStorage.getItem("token")}` },
+      }).then((res) => res.data),
   });
 
   // delete user
