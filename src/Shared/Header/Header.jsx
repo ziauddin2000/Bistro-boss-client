@@ -85,11 +85,13 @@ const Header = () => {
           <div className="navbar-end gap-2">
             {user ? (
               <>
-                <div className="avatar">
-                  <div className="w-10 rounded-full">
-                    <img src={user?.photoURL} />
+                <Link to="/dashboard">
+                  <div className="avatar">
+                    <div className="w-10 rounded-full">
+                      <img src={user?.photoURL} />
+                    </div>
                   </div>
-                </div>
+                </Link>
 
                 <button className="btn" onClick={handleSignOut}>
                   Sign Out

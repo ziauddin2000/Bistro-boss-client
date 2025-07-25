@@ -79,7 +79,7 @@ export default function AuthProvider({ children }) {
     return () => {
       subscribe();
     };
-  }, []);
+  }, [AxiosPublic, auth]);
 
   let authInfo = {
     user,

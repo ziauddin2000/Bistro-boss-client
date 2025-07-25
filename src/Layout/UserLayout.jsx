@@ -13,11 +13,12 @@ import useCart from "../hooks/useCart";
 import { FaBagShopping, FaCodeFork } from "react-icons/fa6";
 import { ImSpoonKnife } from "react-icons/im";
 import { GoCodeReview } from "react-icons/go";
+import useIsAdmin from "../hooks/useIsAdmin";
 
 export default function UserLayout() {
   let [cart] = useCart();
 
-  let isAdmin = true;
+  let { isAdmin } = useIsAdmin();
 
   return (
     <div className="flex">
@@ -50,11 +51,11 @@ export default function UserLayout() {
               </li>
               <li>
                 <NavLink
-                  to="/dashboard/addItems"
+                  to="/dashboard/manageItems"
                   className="flex items-center gap-2 text-base font-medium uppercase px-2 py-2 rounded-sm"
                 >
-                  <FaList className="text-[25px]" />
-                  <span>Add Items</span>
+                  <ImSpoonKnife className="text-[25px]" />
+                  <span>Manage Items</span>
                 </NavLink>
               </li>
               <li>
