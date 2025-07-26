@@ -91,20 +91,10 @@ export default function UserLayout() {
 
               <li>
                 <NavLink
-                  to="/dashboard/reservation"
+                  to="/dashboard/payment-history"
                   className="flex items-center gap-2 text-base font-medium uppercase px-2 py-2 rounded-sm"
                 >
                   <FaCalendar className="text-[25px]" />
-                  <span>Reservation</span>
-                </NavLink>
-              </li>
-
-              <li>
-                <NavLink
-                  to="/dashboard/paymentHistory"
-                  className="flex items-center gap-2 text-base font-medium uppercase px-2 py-2 rounded-sm"
-                >
-                  <FaWallet className="text-[25px]" />
                   <span>Payment History</span>
                 </NavLink>
               </li>
