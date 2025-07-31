@@ -81,7 +81,7 @@ export default function UserLayout() {
             <>
               <li>
                 <NavLink
-                  to="/dashboard"
+                  to="/dashboard/userHome"
                   className="flex items-center gap-2 text-base font-medium uppercase px-2 py-2 rounded-sm"
                 >
                   <FaHome className="text-[25px]" />

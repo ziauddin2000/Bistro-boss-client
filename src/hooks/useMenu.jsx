@@ -9,7 +9,7 @@ const useMenu = () => {
   /*  const [menus, setMenus] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    fetch("http://localhost:5000/menus")
+    fetch("https://bistro-boss-server-psi-three.vercel.app/menus")
       .then((res) => res.json())
       .then((data) => {
         setMenus(data);

@@ -16,6 +16,8 @@ import ManageItems from "../Pages/Dashboard/ManageItems/ManageItems";
 import UpdateItem from "../Pages/Dashboard/updateItem/UpdateItem";
 import Payment from "../Pages/Dashboard/Payment/Payment";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
+import UserHome from "../Pages/Dashboard/UserHome/UserHome";
+import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -56,6 +58,14 @@ export const router = createBrowserRouter([
     element: <UserLayout></UserLayout>,
     children: [
       {
+        path: "userHome",
+        element: (
+          <PrivateRoute>
+            <UserHome />
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "cart",
         element: (
           <PrivateRoute>
@@ -77,6 +87,15 @@ export const router = createBrowserRouter([
           <PrivateRoute>
             <PaymentHistory />
           </PrivateRoute>
+        ),
+      },
+      //Admin Route
+      {
+        path: "adminHome",
+        element: (
+          <AdminRoute>
+            <AdminHome />
+          </AdminRoute>
         ),
       },
       {
@@ -103,7 +122,9 @@ export const router = createBrowserRouter([
           </AdminRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/menu/${params.id}`),
+          fetch(
+            `https://bistro-boss-server-psi-three.vercel.app/menu/${params.id}`
+          ),
       },
       {
         path: "allUsers",

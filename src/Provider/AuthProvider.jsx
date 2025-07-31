@@ -56,7 +56,6 @@ export default function AuthProvider({ children }) {
   useEffect(() => {
     let subscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false);
 
       // jwt token call
       let userInfo = {
@@ -66,12 +65,15 @@ export default function AuthProvider({ children }) {
       if (currentUser) {
         AxiosPublic.post("/jwt", userInfo).then((res) => {
           if (res.data.token) {
+            setLoading(false);
             localStorage.setItem("token", res.data.token);
           } else {
+            setLoading(false);
             localStorage.removeItem("token");
           }
         });
       } else {
+        setLoading(false);
         localStorage.removeItem("token");
       }
     });

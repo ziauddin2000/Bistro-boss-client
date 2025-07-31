@@ -3,9 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 import { IoCart } from "react-icons/io5";
 import useCart from "../../hooks/useCart";
+import useIsAdmin from "../../hooks/useIsAdmin";
 
 const Header = () => {
   let { user, signOutUser } = useContext(AuthContext);
+  const { isAdmin } = useIsAdmin();
+
   let navigate = useNavigate();
 
   let [cart] = useCart();
@@ -28,9 +31,20 @@ const Header = () => {
       <li>
         <Link to="/order">Order</Link>
       </li>
-      <li>
-        <Link to="/secret">Secret</Link>
-      </li>
+      {user && isAdmin ? (
+        <li>
+          <Link to="/dashboard/adminHome">Dashboard</Link>
+        </li>
+      ) : (
+        ""
+      )}
+      {user && !isAdmin ? (
+        <li>
+          <Link to="/dashboard/userHome">Dashboard</Link>
+        </li>
+      ) : (
+        ""
+      )}
       <li>
         <Link to="/dashboard/cart">
           <button className="btn">
